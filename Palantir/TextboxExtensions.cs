@@ -17,5 +17,18 @@ namespace Palantir
             }
             return null;
         }
+
+        public static List<double> GetDoubleList(this System.Windows.Forms.TextBox @this, char separator=';')
+        {
+            if (string.IsNullOrEmpty(@this.Text)) return null;
+            try
+            {
+                return @this.Text.Split(separator).Select(x => double.Parse(x.Trim())).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

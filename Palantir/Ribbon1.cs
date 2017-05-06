@@ -23,7 +23,7 @@ namespace Palantir
 
         private void btnEntrada_Click(object sender, RibbonControlEventArgs e)
         {
-            var dist = Enum.Parse(typeof(Enums.Distribuciones), cmbDistribucion.Text);
+            var dist = (Enums.Distribuciones) Enum.Parse(typeof(Enums.Distribuciones), cmbDistribucion.Text);
             Globals.ThisAddIn.Entrada(dist);
         }
 

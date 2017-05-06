@@ -36,13 +36,13 @@ namespace Palantir
 
         internal void Simulate()
         {
-            throw new NotImplementedException();
+            Distribution.GetNext();
         }
 
         public void Entrada(Enums.Distribuciones dist)
         {
             var activeCell = Application.ActiveCell;
-            DistributionFactory.GetDistribution(dist);
+            this.Distribution = DistributionFactory.GetDistribution(dist);
             this.InputCell = activeCell;
             this.InputCell.Interior.Color = Excel.XlRgbColor.rgbGreen;
         }

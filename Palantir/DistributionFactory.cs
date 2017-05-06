@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MathNet.Numerics.Distributions;
+using Palantir.Windows;
 
 namespace Palantir
 {
@@ -15,7 +16,9 @@ namespace Palantir
             switch (dist)
             {
                 case Enums.Distribuciones.Uniforme:
-                    //result = new ContinuousUniform();
+                    var unif = new ContinuousUniformWindow();
+                    unif.ShowDialog();
+                    result = unif.Distribution;
                     break;
                 case Enums.Distribuciones.Normal:
                     var normal = new NormalWindow();
@@ -23,16 +26,24 @@ namespace Palantir
                     result = normal.Distribution;
                     break;
                 case Enums.Distribuciones.Beta:
-                    //result = new Beta(0, 1);
+                    var beta = new BetaWindow();
+                    beta.ShowDialog();
+                    result = beta.Distribution;
                     break;
                 case Enums.Distribuciones.BetaPERT:
-                    throw new NotImplementedException("falta la betaPERT");
+                    var pert = new BetaPertWindow();
+                    pert.ShowDialog();
+                    result = pert.Distribution;
                     break;
                 case Enums.Distribuciones.Binomial_Discreta:
-                   // result = new Binomial(0.1, 100);
+                    var binom = new BinomialWindow();
+                    binom.ShowDialog();
+                    result = binom.Distribution;
                     break;
                 case Enums.Distribuciones.Custom_Discreta:
-                    throw new NotImplementedException("Custom discreta no está");
+                    var custom = new CustomWindow();
+                    custom.ShowDialog();
+                    result = custom.Distribution;
                     break;
                 default:
                     break;

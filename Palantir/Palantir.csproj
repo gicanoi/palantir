@@ -157,9 +157,44 @@
   -->
   <ItemGroup>
     <Compile Include="DistributionFactory.cs" />
+    <Compile Include="Distributions\BetaDistribution.cs" />
+    <Compile Include="Distributions\BetaPertDistribution.cs" />
+    <Compile Include="Distributions\BinomialDistribution.cs" />
+    <Compile Include="Distributions\ContinuousUniformDistribution.cs" />
+    <Compile Include="Distributions\CustomDistribution.cs" />
     <Compile Include="Distributions\Normal.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IDistribution.cs" />
+    <Compile Include="Windows\BetaPertWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\BetaPertWindow.Designer.cs">
+      <DependentUpon>BetaPertWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BetaWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\BetaWindow.Designer.cs">
+      <DependentUpon>BetaWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BinomialWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\BinomialWindow.Designer.cs">
+      <DependentUpon>BinomialWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ContinuousUniformWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\ContinuousUniformWindow.Designer.cs">
+      <DependentUpon>ContinuousUniformWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CustomWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\CustomWindow.Designer.cs">
+      <DependentUpon>CustomWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NormalWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +204,21 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="Windows\BetaPertWindow.resx">
+      <DependentUpon>BetaPertWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\BetaWindow.resx">
+      <DependentUpon>BetaWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\BinomialWindow.resx">
+      <DependentUpon>BinomialWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\ContinuousUniformWindow.resx">
+      <DependentUpon>ContinuousUniformWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\CustomWindow.resx">
+      <DependentUpon>CustomWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\NormalWindow.resx">
       <DependentUpon>NormalWindow.cs</DependentUpon>
     </EmbeddedResource>
