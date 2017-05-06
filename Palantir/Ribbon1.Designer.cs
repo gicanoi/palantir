@@ -41,6 +41,7 @@
             this.btnOutput = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.btnRun = this.Factory.CreateRibbonButton();
+            this.txtTimes = this.Factory.CreateRibbonEditBox();
             this.tab1.SuspendLayout();
             this.Palantir.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +60,7 @@
             this.Palantir.Items.Add(this.btnOutput);
             this.Palantir.Items.Add(this.separator1);
             this.Palantir.Items.Add(this.btnRun);
+            this.Palantir.Items.Add(this.txtTimes);
             this.Palantir.Label = "Variables";
             this.Palantir.Name = "Palantir";
             // 
@@ -90,6 +92,11 @@
             this.btnRun.Name = "btnRun";
             this.btnRun.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnRun_Click);
             // 
+            // txtTimes
+            // 
+            this.txtTimes.Label = "Repeticiones";
+            this.txtTimes.Name = "txtTimes";
+            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
@@ -113,6 +120,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnOutput;
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnRun;
+        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox txtTimes;
     }
 
     partial class ThisRibbonCollection

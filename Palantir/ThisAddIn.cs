@@ -34,9 +34,21 @@ namespace Palantir
             return range;
         }
 
-        internal void Simulate()
+        internal async void Simulate(int times)
         {
-            Distribution.GetNext();
+            if(InputCell == null || OutputCell == null || Distribution == null)
+            {
+                System.Windows.Forms.MessageBox.Show("Verifique las variables de entrada/salida");
+                return;
+            }
+            var calculatedValues = new List<double>();
+
+            for(int i =0; i< times;i++)
+            {
+                var x = Distribution.GetNext();
+                InputCell.Value = x;
+                calculatedValues.Add((double)OutputCell.Value);
+            }
         }
 
         public void Entrada(Enums.Distribuciones dist)
@@ -53,8 +65,6 @@ namespace Palantir
             this.OutputCell = activeCell;
             this.OutputCell.Interior.Color = Excel.XlRgbColor.rgbLightCyan;
         }
-
-
 
         void Application_WorkbookBeforeSave(Microsoft.Office.Interop.Excel.Workbook Wb, bool SaveAsUI, ref bool Cancel)
         {

@@ -34,7 +34,13 @@ namespace Palantir
 
         private void btnRun_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.Simulate();
+            int times;
+            if(!int.TryParse(txtTimes.Text, out times))
+            {
+                System.Windows.Forms.MessageBox.Show("Verifique las repeticiones");
+                return;
+            }
+            Globals.ThisAddIn.Simulate(times);
         }
     }
 }
