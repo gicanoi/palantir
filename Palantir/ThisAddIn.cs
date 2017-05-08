@@ -39,12 +39,6 @@ namespace Palantir
             return range;
         }
 
-
-        private List<SimulationResult> CalculateDecision(double min, double max, double steps, int times)
-        {
-            return null;
-        }
-
         private SimulationResult CalculateValues(int times)
         {
             var calculatedValues = new List<double>();
@@ -76,6 +70,7 @@ namespace Palantir
             }
             var simulationResult = CalculateValues(times);
             var hist = new Histogram(simulationResult.Values, (int)Math.Sqrt(times));
+            Accord.Controls.HistogramBox.Show(simulationResult.Values.ToArray(),"Resultados");
             var output = new OutputWindow(simulationResult);
             output.Show();
         }
