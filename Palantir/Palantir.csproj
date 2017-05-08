@@ -156,6 +156,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="DecisionVariable.cs" />
     <Compile Include="DistributionFactory.cs" />
     <Compile Include="Distributions\BetaDistribution.cs" />
     <Compile Include="Distributions\BetaPertDistribution.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Distributions\Normal.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IDistribution.cs" />
+    <Compile Include="SimulationResult.cs" />
     <Compile Include="Windows\BetaPertWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +197,18 @@
     <Compile Include="Windows\CustomWindow.Designer.cs">
       <DependentUpon>CustomWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DecisionSimulationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DecisionSimulationWindow.Designer.cs">
+      <DependentUpon>DecisionSimulationWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DecisionVariableWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DecisionVariableWindow.Designer.cs">
+      <DependentUpon>DecisionVariableWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NormalWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +217,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Windows\OutputWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\OutputWindow.Designer.cs">
+      <DependentUpon>OutputWindow.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Windows\BetaPertWindow.resx">
       <DependentUpon>BetaPertWindow.cs</DependentUpon>
@@ -219,6 +239,12 @@
     <EmbeddedResource Include="Windows\CustomWindow.resx">
       <DependentUpon>CustomWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DecisionSimulationWindow.resx">
+      <DependentUpon>DecisionSimulationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DecisionVariableWindow.resx">
+      <DependentUpon>DecisionVariableWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\NormalWindow.resx">
       <DependentUpon>NormalWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -233,6 +259,9 @@
     </Compile>
     <EmbeddedResource Include="Ribbon1.resx">
       <DependentUpon>Ribbon1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\OutputWindow.resx">
+      <DependentUpon>OutputWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Palantir_TemporaryKey.pfx" />

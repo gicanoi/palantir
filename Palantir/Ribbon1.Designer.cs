@@ -42,6 +42,8 @@
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.btnRun = this.Factory.CreateRibbonButton();
             this.txtTimes = this.Factory.CreateRibbonEditBox();
+            this.btnDecision = this.Factory.CreateRibbonButton();
+            this.btnRunWithDecision = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.Palantir.SuspendLayout();
             this.SuspendLayout();
@@ -58,9 +60,11 @@
             this.Palantir.Items.Add(this.cmbDistribucion);
             this.Palantir.Items.Add(this.btnEntrada);
             this.Palantir.Items.Add(this.btnOutput);
+            this.Palantir.Items.Add(this.btnDecision);
             this.Palantir.Items.Add(this.separator1);
             this.Palantir.Items.Add(this.btnRun);
             this.Palantir.Items.Add(this.txtTimes);
+            this.Palantir.Items.Add(this.btnRunWithDecision);
             this.Palantir.Label = "Variables";
             this.Palantir.Name = "Palantir";
             // 
@@ -96,6 +100,19 @@
             // 
             this.txtTimes.Label = "Repeticiones";
             this.txtTimes.Name = "txtTimes";
+            this.txtTimes.Text = null;
+            // 
+            // btnDecision
+            // 
+            this.btnDecision.Label = "Decisión";
+            this.btnDecision.Name = "btnDecision";
+            this.btnDecision.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnDecision_Click);
+            // 
+            // btnRunWithDecision
+            // 
+            this.btnRunWithDecision.Label = "Correr Decisión";
+            this.btnRunWithDecision.Name = "btnRunWithDecision";
+            this.btnRunWithDecision.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnRunWithDecision_Click);
             // 
             // Ribbon1
             // 
@@ -121,6 +138,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnRun;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox txtTimes;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnDecision;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnRunWithDecision;
     }
 
     partial class ThisRibbonCollection

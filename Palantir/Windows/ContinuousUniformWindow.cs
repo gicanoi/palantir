@@ -27,7 +27,7 @@ namespace Palantir.Windows
 
             if (lower != null && beta != null)
             {
-                this.Distribution = new BetaDistribution(lower.Value, beta.Value);
+                this.Distribution = new ContinuousUniformDistribution(lower.Value, beta.Value);
                 this.Close();
             }
             else

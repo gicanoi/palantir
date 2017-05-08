@@ -19,17 +19,22 @@ namespace Palantir
                 item.Label = i.ToString();
                 cmbDistribucion.Items.Add(item);
             }
+            cmbDistribucion.Text = Enums.Distribuciones.Normal.ToString();
         }
 
         private void btnEntrada_Click(object sender, RibbonControlEventArgs e)
         {
+            if(string.IsNullOrEmpty(cmbDistribucion.Text))
+            {
+                System.Windows.Forms.MessageBox.Show("Debe seleccionar una distribución");
+            }
             var dist = (Enums.Distribuciones) Enum.Parse(typeof(Enums.Distribuciones), cmbDistribucion.Text);
-            Globals.ThisAddIn.Entrada(dist);
+            Globals.ThisAddIn.SetInputCell(dist);
         }
 
         private void btnOutput_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.Salida();
+            Globals.ThisAddIn.SetOutputCell();
         }
 
         private void btnRun_Click(object sender, RibbonControlEventArgs e)
@@ -41,6 +46,22 @@ namespace Palantir
                 return;
             }
             Globals.ThisAddIn.Simulate(times);
+        }
+
+        private void btnDecision_Click(object sender, RibbonControlEventArgs e)
+        {
+            Globals.ThisAddIn.SetDecicionCell();
+        }
+
+        private void btnRunWithDecision_Click(object sender, RibbonControlEventArgs e)
+        {
+            int times;
+            if (!int.TryParse(txtTimes.Text, out times))
+            {
+                System.Windows.Forms.MessageBox.Show("Verifique las repeticiones");
+                return;
+            }
+            Globals.ThisAddIn.SimulateWithDecision(times);
         }
     }
 }
