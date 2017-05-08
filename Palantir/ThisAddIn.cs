@@ -82,6 +82,9 @@ namespace Palantir
 
         internal void SimulateWithDecision(int times)
         {
+
+
+
             if (InputCell == null || OutputCell == null || Distribution == null)
             {
                 System.Windows.Forms.MessageBox.Show("Verifique las variables de entrada/salida");
@@ -108,7 +111,7 @@ namespace Palantir
                 System.Windows.Forms.MessageBox.Show("Debe seleccionar un máximo de 2 variables.");
                 return;
             }
-
+            
             if (variables.Count == 1)
             {
                 var singleVariableResults = new Dictionary<string, double>();
@@ -121,6 +124,16 @@ namespace Palantir
                     singleVariableResults.Add(string.Format("{0} ({1})", var1.Name, current), simulationResult.MeanValue);
                     current += var1.Step;
                     var1.DecisionCell.Value = current;
+                }
+
+                var resultBook = this.Application.Workbooks.Add();
+                var sheet = resultBook.ActiveSheet;
+                var i = 0;
+                foreach(var v in singleVariableResults)
+                {
+                    sheet.Cells(1, i + 1).Value = v.Key;
+                    sheet.Cells(2, i + 1).Value = v.Value;
+                    i++;
                 }
             }
             else
@@ -147,7 +160,26 @@ namespace Palantir
                     v1 += var1.Step;
                     var1.DecisionCell.Value = v1;
                 }
+                var resultBook = this.Application.Workbooks.Add();
+                var sheet = resultBook.ActiveSheet;
+                var i = 0;
+                foreach (var v in dualVariableResults)
+                {
+                    sheet.Cells(1, i + 2).Value = v.Key;
+                    var j = 0;
+                    foreach (var w in v.Value)
+                    {
+                        sheet.Cells(j+2, 1).Value = w.Key;
+                        sheet.Cells(j + 2, i + 2).Value = w.Value;
+                        j++;
+                    }
+                    i++;
+                }
+
             }
+
+            
+
         }
 
         public void SetInputCell(Enums.Distribuciones dist)

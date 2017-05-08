@@ -15,6 +15,7 @@ namespace Palantir.Windows
 
         public OutputWindow(SimulationResult simulation)
         {
+            InitializeComponent();
             txtMin.Text = simulation.MinValue.ToString();
             txtMax.Text = simulation.MaxValue.ToString();
             txtMean.Text = simulation.MeanValue.ToString();
