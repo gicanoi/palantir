@@ -55,7 +55,7 @@ namespace Palantir
                 InputCell.Value = x;
                 calculatedValues.Add((double)OutputCell.Value);
             }
-            var meanStdDev = MathNet.Numerics.Statistics.Statistics.MeanStandardDeviation(calculatedValues);
+            var meanStdDev = Statistics.MeanStandardDeviation(calculatedValues);
             return new SimulationResult()
             {
                 Values = calculatedValues,
@@ -80,11 +80,80 @@ namespace Palantir
             output.Show();
         }
 
+        private Dictionary<string, double> SimulateSingleVariable(DecisionVariable variable, int times)
+        {
+            var result = new Dictionary<string, double>();
+            variable.DecisionCell.Value = variable.MinValue;
+            var current = variable.MinValue;
+            while (current <= variable.MaxValue)
+            {
+                var simulationResult = CalculateValues(times);
+                result.Add(string.Format("{0} ({1})", variable.Name, current), simulationResult.MeanValue);
+                current += variable.Step;
+                variable.DecisionCell.Value = current;
+            }
+            return result;
+        }
+
+        private Dictionary<string, Dictionary<string,double>> SimulateDualVariable(DecisionVariable var1, DecisionVariable var2, int times)
+        {
+            var result = new Dictionary<string, Dictionary<string, double>>();
+            var1.DecisionCell.Value = var1.MinValue;
+            var v1 = var1.MinValue;
+            while (v1 <= var1.MaxValue)
+            {
+                var keyV1 = string.Format("{0} ({1})", var1.Name, v1);
+                result.Add(keyV1, new Dictionary<string, double>());
+                var2.DecisionCell.Value = var2.MinValue;
+                var v2 = var2.MinValue;
+                while (v2 <= var2.MaxValue)
+                {
+                    var keyV2 = string.Format("{0} ({1})", var2.Name, v2);
+                    var simulationResult = CalculateValues(times);
+                    result[keyV1].Add(keyV2, simulationResult.MeanValue);
+                    v2 += var2.Step;
+                    var2.DecisionCell.Value = v2;
+                }
+                v1 += var1.Step;
+                var1.DecisionCell.Value = v1;
+            }
+            return result;
+        }
+
+        private void RenderSingleVariableResults(Dictionary<string,double> simulationResults)
+        {
+            var resultBook = this.Application.Workbooks.Add();
+            var sheet = resultBook.ActiveSheet;
+            var i = 0;
+            foreach (var v in simulationResults)
+            {
+                sheet.Cells(1, i + 1).Value = v.Key;
+                sheet.Cells(2, i + 1).Value = v.Value;
+                i++;
+            }
+        }
+
+        private void RenderDualVariableResults(Dictionary<string,Dictionary<string,double>> simulationResults)
+        {
+            var resultBook = this.Application.Workbooks.Add();
+            var sheet = resultBook.ActiveSheet;
+            var i = 0;
+            foreach (var v in simulationResults)
+            {
+                sheet.Cells(1, i + 2).Value = v.Key;
+                var j = 0;
+                foreach (var w in v.Value)
+                {
+                    sheet.Cells(j + 2, 1).Value = w.Key;
+                    sheet.Cells(j + 2, i + 2).Value = w.Value;
+                    j++;
+                }
+                i++;
+            }
+        }
+
         internal void SimulateWithDecision(int times)
         {
-
-
-
             if (InputCell == null || OutputCell == null || Distribution == null)
             {
                 System.Windows.Forms.MessageBox.Show("Verifique las variables de entrada/salida");
@@ -114,72 +183,14 @@ namespace Palantir
             
             if (variables.Count == 1)
             {
-                var singleVariableResults = new Dictionary<string, double>();
-                var var1 = variables[0];
-                var1.DecisionCell.Value = var1.MinValue;
-                var current = var1.MinValue;
-                while (current <= var1.MaxValue)
-                {
-                    var simulationResult = CalculateValues(times);
-                    singleVariableResults.Add(string.Format("{0} ({1})", var1.Name, current), simulationResult.MeanValue);
-                    current += var1.Step;
-                    var1.DecisionCell.Value = current;
-                }
-
-                var resultBook = this.Application.Workbooks.Add();
-                var sheet = resultBook.ActiveSheet;
-                var i = 0;
-                foreach(var v in singleVariableResults)
-                {
-                    sheet.Cells(1, i + 1).Value = v.Key;
-                    sheet.Cells(2, i + 1).Value = v.Value;
-                    i++;
-                }
+                var singleVariableResults = SimulateSingleVariable(variables[0], times);
+                RenderSingleVariableResults(singleVariableResults);
             }
             else
             {
-                var dualVariableResults = new Dictionary<string, Dictionary<string, double>>();
-                var var1 = variables[0];
-                var var2 = variables[1];
-                var1.DecisionCell.Value = var1.MinValue;
-                var v1 = var1.MinValue;
-                while (v1 <= var1.MaxValue)
-                {
-                    var keyV1 = string.Format("{0} ({1})", var1.Name, v1);
-                    dualVariableResults.Add(keyV1, new Dictionary<string, double>());
-                    var2.DecisionCell.Value = var2.MinValue;
-                    var v2 = var2.MinValue;
-                    while (v2 <= var2.MaxValue)
-                    {
-                        var keyV2 = string.Format("{0} ({1})", var2.Name, v2);
-                        var simulationResult = CalculateValues(times);
-                        dualVariableResults[keyV1].Add(keyV2, simulationResult.MeanValue);
-                        v2 += var2.Step;
-                        var2.DecisionCell.Value = v2;
-                    }
-                    v1 += var1.Step;
-                    var1.DecisionCell.Value = v1;
-                }
-                var resultBook = this.Application.Workbooks.Add();
-                var sheet = resultBook.ActiveSheet;
-                var i = 0;
-                foreach (var v in dualVariableResults)
-                {
-                    sheet.Cells(1, i + 2).Value = v.Key;
-                    var j = 0;
-                    foreach (var w in v.Value)
-                    {
-                        sheet.Cells(j+2, 1).Value = w.Key;
-                        sheet.Cells(j + 2, i + 2).Value = w.Value;
-                        j++;
-                    }
-                    i++;
-                }
-
+                var dualVariableResults = SimulateDualVariable(variables[0], variables[1], times);
+                RenderDualVariableResults(dualVariableResults);
             }
-
-            
-
         }
 
         public void SetInputCell(Enums.Distribuciones dist)
@@ -211,13 +222,6 @@ namespace Palantir
 
         public void SetDecicionCell()
         {
-            //if (DecisionCells != null)
-            //{
-            //    this.DecisionCell.Interior.Color = Excel.XlRgbColor.rgbWhite;
-            //    this.DecisionCell = null;
-            //    this.DecisionVariable = null;
-            //}
-
             var decisionWindow = new DecisionVariableWindow();
             decisionWindow.ShowDialog();
             if (decisionWindow.Variable == null)
