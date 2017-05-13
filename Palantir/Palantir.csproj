@@ -195,6 +195,7 @@
     <Compile Include="Distributions\CustomDistribution.cs" />
     <Compile Include="Distributions\Normal.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="ExportModel.cs" />
     <Compile Include="IDistribution.cs" />
     <Compile Include="SimulationResult.cs" />
     <Compile Include="Windows\BetaPertWindow.cs">

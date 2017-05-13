@@ -50,7 +50,7 @@ namespace Palantir
 
         private void btnDecision_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.SetDecicionCell();
+            Globals.ThisAddIn.SetDecisionCell();
         }
 
         private void btnRunWithDecision_Click(object sender, RibbonControlEventArgs e)
@@ -62,6 +62,20 @@ namespace Palantir
                 return;
             }
             Globals.ThisAddIn.SimulateWithDecision(times);
+        }
+
+        private void btnExport_Click(object sender, RibbonControlEventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+            if (string.IsNullOrEmpty(saveFileDialog1.FileName)) return;
+            Globals.ThisAddIn.SaveModel(saveFileDialog1.FileName);
+        }
+
+        private void btnImport_Click(object sender, RibbonControlEventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            if (string.IsNullOrEmpty(openFileDialog1.FileName)) return;
+            Globals.ThisAddIn.LoadModel(openFileDialog1.FileName);
         }
     }
 }

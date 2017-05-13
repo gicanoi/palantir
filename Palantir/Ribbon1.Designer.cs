@@ -39,11 +39,16 @@
             this.cmbDistribucion = this.Factory.CreateRibbonComboBox();
             this.btnEntrada = this.Factory.CreateRibbonButton();
             this.btnOutput = this.Factory.CreateRibbonButton();
+            this.btnDecision = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.btnRun = this.Factory.CreateRibbonButton();
             this.txtTimes = this.Factory.CreateRibbonEditBox();
-            this.btnDecision = this.Factory.CreateRibbonButton();
             this.btnRunWithDecision = this.Factory.CreateRibbonButton();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
+            this.btnExport = this.Factory.CreateRibbonButton();
+            this.btnImport = this.Factory.CreateRibbonButton();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tab1.SuspendLayout();
             this.Palantir.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +70,9 @@
             this.Palantir.Items.Add(this.btnRun);
             this.Palantir.Items.Add(this.txtTimes);
             this.Palantir.Items.Add(this.btnRunWithDecision);
+            this.Palantir.Items.Add(this.separator2);
+            this.Palantir.Items.Add(this.btnExport);
+            this.Palantir.Items.Add(this.btnImport);
             this.Palantir.Label = "Variables";
             this.Palantir.Name = "Palantir";
             // 
@@ -86,6 +94,12 @@
             this.btnOutput.Name = "btnOutput";
             this.btnOutput.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnOutput_Click);
             // 
+            // btnDecision
+            // 
+            this.btnDecision.Label = "Decisión";
+            this.btnDecision.Name = "btnDecision";
+            this.btnDecision.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnDecision_Click);
+            // 
             // separator1
             // 
             this.separator1.Name = "separator1";
@@ -102,17 +116,31 @@
             this.txtTimes.Name = "txtTimes";
             this.txtTimes.Text = null;
             // 
-            // btnDecision
-            // 
-            this.btnDecision.Label = "Decisión";
-            this.btnDecision.Name = "btnDecision";
-            this.btnDecision.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnDecision_Click);
-            // 
             // btnRunWithDecision
             // 
             this.btnRunWithDecision.Label = "Correr Decisión";
             this.btnRunWithDecision.Name = "btnRunWithDecision";
             this.btnRunWithDecision.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnRunWithDecision_Click);
+            // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
+            // 
+            // btnExport
+            // 
+            this.btnExport.Label = "Exportar...";
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnExport_Click);
+            // 
+            // btnImport
+            // 
+            this.btnImport.Label = "Importar...";
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnImport_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Ribbon1
             // 
@@ -140,6 +168,11 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox txtTimes;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnDecision;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnRunWithDecision;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnExport;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnImport;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 
     partial class ThisRibbonCollection

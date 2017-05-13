@@ -7,6 +7,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Palantir
 {
+    [Serializable]
     public class DecisionVariable
     {
         public Excel.Range DecisionCell
@@ -18,6 +19,8 @@ namespace Palantir
             set
             {
                 this.decisionCell = value;
+                this.Column = decisionCell.Column;
+                this.Row = decisionCell.Row;
                 this.key = decisionCell.Column + "," + decisionCell.Row;
                 this.decisionCell.Interior.Color = Excel.XlRgbColor.rgbYellow;
             }
@@ -26,8 +29,18 @@ namespace Palantir
         public double MaxValue { get; set; }
         public double Step { get; set; }
         public string Name { get; set; }
+        public int Column { get; set; }
+        public int Row { get; set; }
         public string Key { get { return this.key; } }
         private string key;
+
+        [NonSerialized]
         private Excel.Range decisionCell;
+
+        public void SetDecisionCell(Excel.Range cell)
+        {
+            this.DecisionCell = cell;
+        }
+
     }
 }
